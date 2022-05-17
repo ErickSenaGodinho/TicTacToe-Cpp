@@ -14,16 +14,7 @@ class TicTacToe
 
 public:
     TicTacToe();
-
-    void showBoard();
-    string getCurrentPlayerName();
-    pair<unsigned int, unsigned int> askPosition();
-    void processPosition(pair<unsigned int, unsigned int> &);
-    bool isPositionAvaible(pair<unsigned int, unsigned int>);
-    void makePlay(pair<unsigned int, unsigned int>);
-    void checkWin(pair<unsigned int, unsigned int>);
-    void clearTerminal();
-    bool isGameOver();
+    void start();
 
 private:
     Player mPlayer_1;
@@ -33,14 +24,23 @@ private:
     bool mIs_game_over = false;
 
     void registerPlayers();
+    void clearTerminal();
     void clearBoard();
+    void showBoard();
+    pair<unsigned int, unsigned int> askPosition();
+    string getCurrentPlayerName();
+    void processPosition(pair<unsigned int, unsigned int> &);
+    bool isPositionAvaible(pair<unsigned int, unsigned int>);
+    void makePlay(pair<unsigned int, unsigned int>);
     char getCurrentPlayerCharacter();
+    void checkWin(pair<unsigned int, unsigned int>);
     bool hasAWinner(pair<unsigned int, unsigned int>);
     bool checkRow(unsigned int, char);
     bool checkCol(unsigned int, char);
     bool checkMainDiagonal(pair<unsigned int, unsigned int>, char);
     bool checkSecondaryDiagonal(pair<unsigned int, unsigned int>, char);
     void changePlayerTime();
+    bool isGameOver();
 };
 
 #endif

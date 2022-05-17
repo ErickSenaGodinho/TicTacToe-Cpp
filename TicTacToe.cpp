@@ -8,6 +8,28 @@ TicTacToe::TicTacToe()
     clearBoard();
 }
 
+void TicTacToe::start()
+{
+    do
+    {
+        showBoard();
+        pair<unsigned int, unsigned int> position = askPosition();
+        processPosition(position);
+
+        if (isPositionAvaible(position))
+        {
+            makePlay(position);
+            checkWin(position);
+        }
+        else
+        {
+            clearTerminal();
+            cout << "This position is unavaible" << endl;
+        }
+
+    } while (!isGameOver());
+}
+
 void TicTacToe::registerPlayers()
 {
     string player_1_name, player_2_name;
@@ -20,6 +42,11 @@ void TicTacToe::registerPlayers()
     mPlayer_2.setName(player_2_name);
 
     clearTerminal();
+}
+
+void TicTacToe::clearTerminal()
+{
+    system("cls");
 }
 
 void TicTacToe::clearBoard()
@@ -50,11 +77,6 @@ void TicTacToe::showBoard()
             cout << "\t---------" << endl;
         }
     }
-}
-
-void TicTacToe::clearTerminal()
-{
-    system("cls");
 }
 
 pair<unsigned int, unsigned int> TicTacToe::askPosition()
