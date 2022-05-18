@@ -2,8 +2,8 @@
 
 TicTacToe::TicTacToe()
 {
-    mPlayer_1 = Player();
-    mPlayer_2 = Player();
+    mPlayer_1 = Player(Symbol::X);
+    mPlayer_2 = Player(Symbol::O);
     registerPlayers();
     clearBoard();
 }
@@ -33,9 +33,11 @@ void TicTacToe::start()
 void TicTacToe::registerPlayers()
 {
     string player_1_name, player_2_name;
-    cout << "Enter player 1 name (x):" << endl;
+    char player_1_symbol = (char)mPlayer_1.getSymbol();
+    char player_2_symbol = (char)mPlayer_2.getSymbol();
+    cout << "Enter player 1 name (" << player_1_symbol << "):" << endl;
     cin >> player_1_name;
-    cout << "Enter player 2 name (O):" << endl;
+    cout << "Enter player 2 name (" << player_2_symbol << "):" << endl;
     cin >> player_2_name;
 
     mPlayer_1.setName(player_1_name);
@@ -121,12 +123,12 @@ void TicTacToe::makePlay(pair<unsigned int, unsigned int> position)
 {
     unsigned int row = position.first;
     unsigned int col = position.second;
-    mBoard[row][col] = getCurrentPlayerCharacter();
+    mBoard[row][col] = (char)getCurrentPlayerSymbol();
 }
 
-char TicTacToe::getCurrentPlayerCharacter()
+Symbol TicTacToe::getCurrentPlayerSymbol()
 {
-    return mIs_player_1_time ? 'X' : 'O';
+    return mIs_player_1_time ? mPlayer_1.getSymbol() : mPlayer_2.getSymbol();
 }
 
 void TicTacToe::checkWin(pair<unsigned int, unsigned int> position)
@@ -148,16 +150,16 @@ void TicTacToe::checkWin(pair<unsigned int, unsigned int> position)
 
 bool TicTacToe::hasAWinner(pair<unsigned int, unsigned int> position)
 {
-    char player = getCurrentPlayerCharacter();
-    bool has_a_winner = checkRow(position.first, player) || checkCol(position.second, player) || checkMainDiagonal(position, player) || checkSecondaryDiagonal(position, player);
+    Symbol symbol = getCurrentPlayerSymbol();
+    bool has_a_winner = checkRow(position.first, symbol) || checkCol(position.second, symbol) || checkMainDiagonal(position, symbol) || checkSecondaryDiagonal(position, symbol);
     return has_a_winner;
 }
 
-bool TicTacToe::checkRow(unsigned int row, char player)
+bool TicTacToe::checkRow(unsigned int row, Symbol symbol)
 {
     for (int i = 0; i < BOARD_SIZE; i++)
     {
-        if (mBoard[row][i] != player)
+        if (mBoard[row][i] != (char)symbol)
         {
             return false;
         }
@@ -165,11 +167,11 @@ bool TicTacToe::checkRow(unsigned int row, char player)
     return true;
 }
 
-bool TicTacToe::checkCol(unsigned int col, char player)
+bool TicTacToe::checkCol(unsigned int col, Symbol symbol)
 {
     for (int i = 0; i < BOARD_SIZE; i++)
     {
-        if (mBoard[i][col] != player)
+        if (mBoard[i][col] != (char)symbol)
         {
             return false;
         }
@@ -177,13 +179,13 @@ bool TicTacToe::checkCol(unsigned int col, char player)
     return true;
 }
 
-bool TicTacToe::checkMainDiagonal(pair<unsigned int, unsigned int> position, char player)
+bool TicTacToe::checkMainDiagonal(pair<unsigned int, unsigned int> position, Symbol symbol)
 {
     if (position.first == position.second)
     {
         for (int i = 0; i < BOARD_SIZE; i++)
         {
-            if (mBoard[i][i] != player)
+            if (mBoard[i][i] != (char)symbol)
             {
                 return false;
             }
@@ -197,13 +199,13 @@ bool TicTacToe::checkMainDiagonal(pair<unsigned int, unsigned int> position, cha
     return false;
 }
 
-bool TicTacToe::checkSecondaryDiagonal(pair<unsigned int, unsigned int> position, char player)
+bool TicTacToe::checkSecondaryDiagonal(pair<unsigned int, unsigned int> position, Symbol symbol)
 {
     if (position.first + position.second == BOARD_SIZE - 1)
     {
         for (int i = 0; i < BOARD_SIZE; i++)
         {
-            if (mBoard[i][BOARD_SIZE - 1 - i] != player)
+            if (mBoard[i][BOARD_SIZE - 1 - i] != (char)symbol)
             {
                 return false;
             }

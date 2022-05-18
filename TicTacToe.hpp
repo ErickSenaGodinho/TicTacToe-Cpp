@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include "Player.cpp"
+#include "Symbol.hpp"
 
 using namespace std;
 
@@ -32,13 +33,13 @@ private:
     void processPosition(pair<unsigned int, unsigned int> &);
     bool isPositionAvaible(pair<unsigned int, unsigned int>);
     void makePlay(pair<unsigned int, unsigned int>);
-    char getCurrentPlayerCharacter();
+    Symbol getCurrentPlayerSymbol();
     void checkWin(pair<unsigned int, unsigned int>);
     bool hasAWinner(pair<unsigned int, unsigned int>);
-    bool checkRow(unsigned int, char);
-    bool checkCol(unsigned int, char);
-    bool checkMainDiagonal(pair<unsigned int, unsigned int>, char);
-    bool checkSecondaryDiagonal(pair<unsigned int, unsigned int>, char);
+    bool checkRow(unsigned int, Symbol);
+    bool checkCol(unsigned int, Symbol);
+    bool checkMainDiagonal(pair<unsigned int, unsigned int>, Symbol);
+    bool checkSecondaryDiagonal(pair<unsigned int, unsigned int>, Symbol);
     void changePlayerTime();
     bool isGameOver();
 };

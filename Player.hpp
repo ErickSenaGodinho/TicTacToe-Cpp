@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "Symbol.hpp"
 
 using namespace std;
 
@@ -10,6 +11,8 @@ class Player
 {
 public:
     Player();
+
+    Player(Symbol);
 
     void setName(string name)
     {
@@ -19,6 +22,16 @@ public:
     string getName()
     {
         return mName;
+    }
+
+    void setSymbol(Symbol symbol)
+    {
+        mSymbol = symbol;
+    }
+
+    Symbol getSymbol()
+    {
+        return mSymbol;
     }
 
     void setScore(int score)
@@ -35,6 +48,7 @@ public:
 
 private:
     string mName;
+    Symbol mSymbol;
     unsigned int mScore;
 };
 
