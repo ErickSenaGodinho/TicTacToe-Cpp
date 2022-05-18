@@ -28,6 +28,7 @@ private:
     void clearTerminal();
     void clearBoard();
     void showBoard();
+    void showScoreBoard();
     pair<unsigned int, unsigned int> askPosition();
     string getCurrentPlayerName();
     void processPosition(pair<unsigned int, unsigned int> &);
@@ -40,6 +41,7 @@ private:
     bool checkCol(unsigned int, Symbol);
     bool checkMainDiagonal(pair<unsigned int, unsigned int>, Symbol);
     bool checkSecondaryDiagonal(pair<unsigned int, unsigned int>, Symbol);
+    void addScoreToCurrentPlayer();
     void changePlayerTime();
     bool isGameOver();
 };

@@ -64,6 +64,8 @@ void TicTacToe::clearBoard()
 
 void TicTacToe::showBoard()
 {
+    showScoreBoard();
+
     for (int i = 0; i < BOARD_SIZE; i++)
     {
         cout << "\t";
@@ -79,6 +81,11 @@ void TicTacToe::showBoard()
             cout << "\t---------" << endl;
         }
     }
+}
+
+void TicTacToe::showScoreBoard()
+{
+    cout << "\t" << mPlayer_1.getName() << " " << mPlayer_1.getScore() << " | " << mPlayer_2.getName() << " " << mPlayer_2.getScore() << endl;
 }
 
 pair<unsigned int, unsigned int> TicTacToe::askPosition()
@@ -135,6 +142,8 @@ void TicTacToe::checkWin(pair<unsigned int, unsigned int> position)
 {
     if (hasAWinner(position))
     {
+        addScoreToCurrentPlayer();
+
         clearTerminal();
         showBoard();
 
@@ -213,6 +222,11 @@ bool TicTacToe::checkSecondaryDiagonal(pair<unsigned int, unsigned int> position
         return true;
     }
     return false;
+}
+
+void TicTacToe::addScoreToCurrentPlayer()
+{
+    mIs_player_1_time ? mPlayer_1.addScore() : mPlayer_2.addScore();
 }
 
 void TicTacToe::changePlayerTime()
