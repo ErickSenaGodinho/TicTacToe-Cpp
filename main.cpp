@@ -4,8 +4,6 @@
 
 using namespace std;
 
-void showMenu();
-
 int main()
 {
 
