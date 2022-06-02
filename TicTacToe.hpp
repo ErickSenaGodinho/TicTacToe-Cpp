@@ -27,6 +27,7 @@ private:
     void registerPlayers();
     void clearTerminal();
     void clearBoard();
+    void showGame();
     void showBoard();
     void showScoreBoard();
     pair<unsigned int, unsigned int> askPosition();

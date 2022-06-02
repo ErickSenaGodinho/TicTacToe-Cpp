@@ -12,7 +12,7 @@ void TicTacToe::start()
 {
     do
     {
-        showBoard();
+        showGame();
         pair<unsigned int, unsigned int> position = askPosition();
         processPosition(position);
 
@@ -62,23 +62,27 @@ void TicTacToe::clearBoard()
     }
 }
 
-void TicTacToe::showBoard()
+void TicTacToe::showGame()
 {
     showScoreBoard();
+    showBoard();
+}
 
+void TicTacToe::showBoard()
+{
     for (int i = 0; i < BOARD_SIZE; i++)
     {
         cout << "\t";
 
         for (int j = 0; j < BOARD_SIZE; j++)
         {
-            cout << mBoard[i][j];
-            j == BOARD_SIZE - 1 ? cout << "\n" : cout << " | ";
+            cout << " " << mBoard[i][j] << " ";
+            j == BOARD_SIZE - 1 ? cout << "\n" : cout << "|";
         }
 
         if (i < BOARD_SIZE - 1)
         {
-            cout << "\t---------" << endl;
+            cout << "\t-----------" << endl;
         }
     }
 }
@@ -145,7 +149,7 @@ void TicTacToe::checkWin(pair<unsigned int, unsigned int> position)
         addScoreToCurrentPlayer();
 
         clearTerminal();
-        showBoard();
+        showGame();
 
         cout << "Winner: " << getCurrentPlayerName();
         mIs_game_over = true;
