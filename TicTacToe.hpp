@@ -43,6 +43,7 @@ private:
     bool checkMainDiagonal(pair<unsigned int, unsigned int>, Symbol);
     bool checkSecondaryDiagonal(pair<unsigned int, unsigned int>, Symbol);
     void addScoreToCurrentPlayer();
+    bool askPlayAgain();
     void changePlayerTime();
     bool isGameOver();
 };

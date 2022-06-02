@@ -151,8 +151,19 @@ void TicTacToe::checkWin(pair<unsigned int, unsigned int> position)
         clearTerminal();
         showGame();
 
-        cout << "Winner: " << getCurrentPlayerName();
-        mIs_game_over = true;
+        cout << "Winner: " << getCurrentPlayerName() << endl;
+
+        bool willPlayAgain = askPlayAgain();
+
+        if (willPlayAgain)
+        {
+            clearBoard();
+            clearTerminal();
+        }
+        else
+        {
+            mIs_game_over = true;
+        }
     }
     else
     {
@@ -233,6 +244,25 @@ void TicTacToe::addScoreToCurrentPlayer()
     mIs_player_1_time ? mPlayer_1.addScore() : mPlayer_2.addScore();
 }
 
+bool TicTacToe::askPlayAgain()
+{
+    int answer;
+    do
+    {
+        cout << "Do you wanna play again?" << endl;
+        cout << "1-Yes" << endl;
+        cout << "2-Exit" << endl;
+
+        cin >> answer;
+    } while (answer != 1 && answer != 2);
+
+    return answer == 1;
+}
+
+/** Changes the player's turn
+ *
+ * If it's player 1's turn, it turns to player 2's turn and vice versa.
+ */
 void TicTacToe::changePlayerTime()
 {
     mIs_player_1_time = !mIs_player_1_time;
