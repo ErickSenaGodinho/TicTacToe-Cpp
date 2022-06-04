@@ -97,9 +97,9 @@ pair<unsigned int, unsigned int> TicTacToe::askPosition()
     unsigned int row, col;
     cout << "Player: " << getCurrentPlayerName() << endl;
     cout << "Row: ";
-    cin >> row;
+    row = input();
     cout << "Col: ";
-    cin >> col;
+    col = input();
     pair<unsigned int, unsigned int> position = make_pair(row, col);
     return position;
 }
@@ -107,6 +107,18 @@ pair<unsigned int, unsigned int> TicTacToe::askPosition()
 string TicTacToe::getCurrentPlayerName()
 {
     return mIs_player_1_time ? mPlayer_1.getName() : mPlayer_2.getName();
+}
+
+int TicTacToe::input()
+{
+    string input;
+    cin >> input;
+    return validateInput(input);
+}
+
+int TicTacToe::validateInput(string input)
+{
+    return (int)input[0] - '0';
 }
 
 void TicTacToe::processPosition(pair<unsigned int, unsigned int> &position)
@@ -267,8 +279,7 @@ bool TicTacToe::askPlayAgain()
         cout << "Do you wanna play again?" << endl;
         cout << "1-Yes" << endl;
         cout << "2-Exit" << endl;
-
-        cin >> answer;
+        answer = input();
     } while (answer != 1 && answer != 2);
 
     return answer == 1;

@@ -5,6 +5,8 @@
 using namespace std;
 
 bool showMenu();
+int input();
+int validateInput(string);
 
 int main()
 {
@@ -32,4 +34,16 @@ bool showMenu()
         answer = input();
     } while (answer <= 0 || answer > 2);
     return answer == 1;
+}
+
+int input()
+{
+    string input;
+    cin >> input;
+    return validateInput(input);
+}
+
+int validateInput(string input)
+{
+    return (int)input[0] - '0';
 }

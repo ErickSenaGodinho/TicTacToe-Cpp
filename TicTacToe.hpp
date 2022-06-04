@@ -33,6 +33,8 @@ private:
     void showScoreBoard();
     pair<unsigned int, unsigned int> askPosition();
     string getCurrentPlayerName();
+    int input();
+    int validateInput(string);
     void processPosition(pair<unsigned int, unsigned int> &);
     bool isPositionAvaible(pair<unsigned int, unsigned int>);
     void makePlay(pair<unsigned int, unsigned int>);
