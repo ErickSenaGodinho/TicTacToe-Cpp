@@ -23,6 +23,7 @@ private:
     char mBoard[BOARD_SIZE][BOARD_SIZE];
     bool mIs_player_1_time = true;
     bool mIs_game_over = false;
+    unsigned int mPlays = 0;
 
     void registerPlayers();
     void clearTerminal();
@@ -43,6 +44,7 @@ private:
     bool checkMainDiagonal(pair<unsigned int, unsigned int>, Symbol);
     bool checkSecondaryDiagonal(pair<unsigned int, unsigned int>, Symbol);
     void addScoreToCurrentPlayer();
+    void checkPlayAgain();
     bool askPlayAgain();
     void changePlayerTime();
     bool isGameOver();

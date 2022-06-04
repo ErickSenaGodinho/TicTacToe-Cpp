@@ -135,6 +135,7 @@ void TicTacToe::makePlay(pair<unsigned int, unsigned int> position)
     unsigned int row = position.first;
     unsigned int col = position.second;
     mBoard[row][col] = (char)getCurrentPlayerSymbol();
+    mPlays++;
 }
 
 Symbol TicTacToe::getCurrentPlayerSymbol()
@@ -153,22 +154,20 @@ void TicTacToe::checkWin(pair<unsigned int, unsigned int> position)
 
         cout << "Winner: " << getCurrentPlayerName() << endl;
 
-        bool willPlayAgain = askPlayAgain();
-
-        if (willPlayAgain)
-        {
-            clearBoard();
-            clearTerminal();
-        }
-        else
-        {
-            mIs_game_over = true;
-        }
+        checkPlayAgain();
     }
-    else
+    else if (mPlays < 9)
     {
         changePlayerTime();
         clearTerminal();
+    }
+    else
+    {
+        clearTerminal();
+        showGame();
+
+        cout << "Draw" << endl;
+        checkPlayAgain();
     }
 }
 
@@ -242,6 +241,22 @@ bool TicTacToe::checkSecondaryDiagonal(pair<unsigned int, unsigned int> position
 void TicTacToe::addScoreToCurrentPlayer()
 {
     mIs_player_1_time ? mPlayer_1.addScore() : mPlayer_2.addScore();
+}
+
+void TicTacToe::checkPlayAgain()
+{
+    bool willPlayAgain = askPlayAgain();
+
+    if (willPlayAgain)
+    {
+        clearBoard();
+        clearTerminal();
+        mPlays = 0;
+    }
+    else
+    {
+        mIs_game_over = true;
+    }
 }
 
 bool TicTacToe::askPlayAgain()
