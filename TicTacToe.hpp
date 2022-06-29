@@ -23,6 +23,7 @@ private:
     char mBoard[BOARD_SIZE][BOARD_SIZE];
     bool mIs_player_1_time = true;
     bool mIs_game_over = false;
+    bool mHas_a_winner = false;
     unsigned int mPlays = 0;
 
     void registerPlayers();
@@ -40,7 +41,7 @@ private:
     void makePlay(pair<unsigned int, unsigned int>);
     Symbol getCurrentPlayerSymbol();
     void checkWin(pair<unsigned int, unsigned int>);
-    bool hasAWinner(pair<unsigned int, unsigned int>);
+    void checkWinner(pair<unsigned int, unsigned int>);
     bool checkRow(unsigned int, Symbol);
     bool checkCol(unsigned int, Symbol);
     bool checkMainDiagonal(pair<unsigned int, unsigned int>, Symbol);

@@ -157,15 +157,10 @@ Symbol TicTacToe::getCurrentPlayerSymbol()
 
 void TicTacToe::checkWin(pair<unsigned int, unsigned int> position)
 {
-    if (hasAWinner(position))
+    checkWinner(position);
+    if (mHas_a_winner)
     {
         addScoreToCurrentPlayer();
-
-        clearTerminal();
-        showGame();
-
-        cout << "Winner: " << getCurrentPlayerName() << endl;
-
         checkPlayAgain();
     }
     else if (mPlays < 9)
@@ -175,19 +170,14 @@ void TicTacToe::checkWin(pair<unsigned int, unsigned int> position)
     }
     else
     {
-        clearTerminal();
-        showGame();
-
-        cout << "Draw" << endl;
         checkPlayAgain();
     }
 }
 
-bool TicTacToe::hasAWinner(pair<unsigned int, unsigned int> position)
+void TicTacToe::checkWinner(pair<unsigned int, unsigned int> position)
 {
     Symbol symbol = getCurrentPlayerSymbol();
-    bool has_a_winner = checkRow(position.first, symbol) || checkCol(position.second, symbol) || checkMainDiagonal(position, symbol) || checkSecondaryDiagonal(position, symbol);
-    return has_a_winner;
+    mHas_a_winner = checkRow(position.first, symbol) || checkCol(position.second, symbol) || checkMainDiagonal(position, symbol) || checkSecondaryDiagonal(position, symbol);
 }
 
 bool TicTacToe::checkRow(unsigned int row, Symbol symbol)
@@ -276,6 +266,12 @@ bool TicTacToe::askPlayAgain()
     int answer;
     do
     {
+        clearTerminal();
+        showGame();
+
+        cout << (mHas_a_winner ? "Winner: " + getCurrentPlayerName()
+                               : "Draw")
+             << endl;
         cout << "Do you wanna play again?" << endl;
         cout << "1-Yes" << endl;
         cout << "2-Exit" << endl;
