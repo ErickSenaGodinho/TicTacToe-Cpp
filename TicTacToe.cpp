@@ -32,6 +32,8 @@ void TicTacToe::start()
 
 void TicTacToe::registerPlayers()
 {
+    clearTerminal();
+
     string player_1_name, player_2_name;
     char player_1_symbol = (char)mPlayer_1.getSymbol();
     char player_2_symbol = (char)mPlayer_2.getSymbol();
