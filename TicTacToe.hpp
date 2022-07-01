@@ -35,7 +35,7 @@ private:
     void showScoreBoard();
     pair<unsigned int, unsigned int> askPosition();
     string getCurrentPlayerName();
-    void processPosition(pair<unsigned int, unsigned int> &);
+    pair<unsigned int, unsigned int> processPosition(pair<unsigned int, unsigned int>);
     bool isPositionAvaible(pair<unsigned int, unsigned int>);
     void makePlay(pair<unsigned int, unsigned int>);
     Symbol getCurrentPlayerSymbol();

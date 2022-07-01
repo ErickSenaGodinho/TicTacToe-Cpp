@@ -14,7 +14,7 @@ void TicTacToe::start()
     {
         showGame();
         pair<unsigned int, unsigned int> position = askPosition();
-        processPosition(position);
+        position = processPosition(position);
 
         if (isPositionAvaible(position))
         {
@@ -112,21 +112,18 @@ string TicTacToe::getCurrentPlayerName()
     return mIs_player_1_time ? mPlayer_1.getName() : mPlayer_2.getName();
 }
 
-void TicTacToe::processPosition(pair<unsigned int, unsigned int> &position)
+pair<unsigned int, unsigned int> TicTacToe::processPosition(pair<unsigned int, unsigned int> position)
 {
     position.first--;
     position.second--;
+    return position;
 }
 
 bool TicTacToe::isPositionAvaible(pair<unsigned int, unsigned int> position)
 {
     unsigned int row = position.first;
     unsigned int col = position.second;
-    if (row > BOARD_SIZE || col > BOARD_SIZE)
-    {
-        return false;
-    }
-    if (mBoard[row][col] != ' ')
+    if (row > BOARD_SIZE || col > BOARD_SIZE || mBoard[row][col] != ' ')
     {
         return false;
     }
