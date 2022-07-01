@@ -25,6 +25,7 @@ private:
     bool mIs_game_over = false;
     bool mHas_a_winner = false;
     unsigned int mPlays = 0;
+    unsigned int mDraw_Score = 0;
 
     void registerPlayers();
     void clearTerminal();

@@ -91,7 +91,8 @@ void TicTacToe::showBoard()
 
 void TicTacToe::showScoreBoard()
 {
-    cout << "\t" << mPlayer_1.getName() << " " << mPlayer_1.getScore() << " | " << mPlayer_2.getName() << " " << mPlayer_2.getScore() << endl;
+    cout << mPlayer_1.getName() << " " << mPlayer_1.getScore() << " | " << mPlayer_2.getName() << " " << mPlayer_2.getScore()
+         << " | Draw " << mDraw_Score << endl;
 }
 
 pair<unsigned int, unsigned int> TicTacToe::askPosition()
@@ -172,6 +173,7 @@ void TicTacToe::checkWin(pair<unsigned int, unsigned int> position)
     }
     else
     {
+        mDraw_Score++;
         checkPlayAgain();
     }
 }
