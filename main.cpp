@@ -1,6 +1,6 @@
 #include <iostream>
-#include <string>
 #include "TicTacToe.cpp"
+#include "validate-input.hpp"
 
 using namespace std;
 
@@ -34,16 +34,4 @@ bool showMenu()
         answer = input();
     } while (answer <= 0 || answer > 2);
     return answer == 1;
-}
-
-int input()
-{
-    string input;
-    cin >> input;
-    return validateInput(input);
-}
-
-int validateInput(string input)
-{
-    return (int)input[0] - '0';
 }

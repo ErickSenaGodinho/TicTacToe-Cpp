@@ -112,18 +112,6 @@ string TicTacToe::getCurrentPlayerName()
     return mIs_player_1_time ? mPlayer_1.getName() : mPlayer_2.getName();
 }
 
-int TicTacToe::input()
-{
-    string input;
-    cin >> input;
-    return validateInput(input);
-}
-
-int TicTacToe::validateInput(string input)
-{
-    return (int)input[0] - '0';
-}
-
 void TicTacToe::processPosition(pair<unsigned int, unsigned int> &position)
 {
     position.first--;

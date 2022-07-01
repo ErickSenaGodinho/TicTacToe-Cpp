@@ -2,9 +2,9 @@
 #define TICTACTOE_H
 
 #include <iostream>
-#include <string>
 #include "Player.cpp"
 #include "Symbol.hpp"
+#include "validate-input.hpp"
 
 using namespace std;
 
@@ -35,8 +35,6 @@ private:
     void showScoreBoard();
     pair<unsigned int, unsigned int> askPosition();
     string getCurrentPlayerName();
-    int input();
-    int validateInput(string);
     void processPosition(pair<unsigned int, unsigned int> &);
     bool isPositionAvaible(pair<unsigned int, unsigned int>);
     void makePlay(pair<unsigned int, unsigned int>);
