@@ -6,11 +6,9 @@ Player::Player()
     mScore = 0;
 }
 
-Player::Player(Symbol symbol)
+Player::Player(Symbol symbol) : Player()
 {
-    mName = "";
     mSymbol = symbol;
-    mScore = 0;
 }
 
 void Player::addScore()
