@@ -1,5 +1,7 @@
 #include "TicTacToe.hpp"
 
+/** Creates a TicTacToe game.
+ */
 TicTacToe::TicTacToe()
 {
     mPlayer_1 = Player(Symbol::X);
@@ -8,6 +10,10 @@ TicTacToe::TicTacToe()
     clearBoard();
 }
 
+/** Starts the TicTacToe game.
+ *
+ * Processes the main logic of TicTacToe.
+ */
 void TicTacToe::start()
 {
     do
@@ -30,6 +36,12 @@ void TicTacToe::start()
     } while (!isGameOver());
 }
 
+/** Registers players in the game.
+ *
+ * @see Player::Player()
+ * @see Player::setSymbol
+ * @see Player::setName
+ */
 void TicTacToe::registerPlayers()
 {
     clearTerminal();
@@ -48,11 +60,17 @@ void TicTacToe::registerPlayers()
     clearTerminal();
 }
 
+/** Cleans the terminal.
+ */
 void TicTacToe::clearTerminal()
 {
     system("cls");
 }
 
+/** Resets the TicTacToe Board.
+ *
+ * All positions of board turn into a space character.
+ */
 void TicTacToe::clearBoard()
 {
     for (int i = 0; i < BOARD_SIZE; i++)
@@ -64,12 +82,24 @@ void TicTacToe::clearBoard()
     }
 }
 
+/** Prints the TicTacToe Game in the terminal.
+ *
+ * The game is comprised by the score board and game board.
+ *
+ * @see showScoreBoard
+ * @see showBoard
+ */
 void TicTacToe::showGame()
 {
     showScoreBoard();
     showBoard();
 }
 
+/** Prints the TicTacToe board in the terminal.
+ *
+ * @see showGame
+ * @see showScoreBoard
+ */
 void TicTacToe::showBoard()
 {
     for (int i = 0; i < BOARD_SIZE; i++)
@@ -89,12 +119,27 @@ void TicTacToe::showBoard()
     }
 }
 
+/** Prints the game score board in the terminal.
+ *
+ * @see showGame
+ * @see showBoard
+ * @see Player::getName
+ * @see Player::getScore
+ */
 void TicTacToe::showScoreBoard()
 {
     cout << mPlayer_1.getName() << " " << mPlayer_1.getScore() << " | " << mPlayer_2.getName() << " " << mPlayer_2.getScore()
          << " | Draw " << mDraw_Score << endl;
 }
 
+/** Asks the position to make the play.
+ *
+ * @return a pair, with it's member pair::first is the row and the pair::second is the column
+ *
+ * @see pair
+ * @see processPosition
+ * @see isPositionAvaible
+ */
 pair<unsigned int, unsigned int> TicTacToe::askPosition()
 {
     unsigned int row, col;
@@ -107,11 +152,26 @@ pair<unsigned int, unsigned int> TicTacToe::askPosition()
     return position;
 }
 
+/** Gets the current player name.
+ *
+ * @return the name of the current player
+ *
+ * @see Player::getName
+ */
 string TicTacToe::getCurrentPlayerName()
 {
     return mIs_player_1_time ? mPlayer_1.getName() : mPlayer_2.getName();
 }
 
+/** Processes the position the player chose by turning into an index.
+ *
+ * @param position position that the player chose
+ *
+ * @return a position with processed values
+ *
+ * @see askPosition
+ * @see isPositionAvaible
+ */
 pair<unsigned int, unsigned int> TicTacToe::processPosition(pair<unsigned int, unsigned int> position)
 {
     position.first--;
@@ -119,6 +179,14 @@ pair<unsigned int, unsigned int> TicTacToe::processPosition(pair<unsigned int, u
     return position;
 }
 
+/** Determines whether the position is avaible in the board.
+ *
+ * @param position processed position that the player chose
+ *
+ * @see processPosition
+ *
+ * @return true if the position is empty in the board, false otherwise
+ */
 bool TicTacToe::isPositionAvaible(pair<unsigned int, unsigned int> position)
 {
     unsigned int row = position.first;
@@ -130,6 +198,12 @@ bool TicTacToe::isPositionAvaible(pair<unsigned int, unsigned int> position)
     return true;
 }
 
+/** Fills the position with the current player's symbol in the chosen position.
+ *
+ * @param position processed position that the player chose
+ *
+ * @see processPosition
+ */
 void TicTacToe::makePlay(pair<unsigned int, unsigned int> position)
 {
     unsigned int row = position.first;
@@ -138,11 +212,24 @@ void TicTacToe::makePlay(pair<unsigned int, unsigned int> position)
     mPlays++;
 }
 
+/** Gets the symbol of the current player.
+ *
+ * @see Player::getSymbol
+ *
+ * @return symbol of the current player
+ */
 Symbol TicTacToe::getCurrentPlayerSymbol()
 {
     return mIs_player_1_time ? mPlayer_1.getSymbol() : mPlayer_2.getSymbol();
 }
 
+/** Checks if the player win.
+ *
+ * @param position processed position that the player chose
+ *
+ * @see processPosition
+ * @see checkWinner
+ */
 void TicTacToe::checkWin(pair<unsigned int, unsigned int> position)
 {
     checkWinner(position);
@@ -163,12 +250,35 @@ void TicTacToe::checkWin(pair<unsigned int, unsigned int> position)
     }
 }
 
+/** Determines whether the game has a winner.
+ *
+ * @param position processed position that the player chose
+ *
+ * @see processPosition
+ * @see checkWin
+ * @see checkRow
+ * @see checkCol
+ * @see checkMainDiagonal
+ * @see checkSecondaryDiagonal
+ */
 void TicTacToe::checkWinner(pair<unsigned int, unsigned int> position)
 {
     Symbol symbol = getCurrentPlayerSymbol();
     mHas_a_winner = checkRow(position.first, symbol) || checkCol(position.second, symbol) || checkMainDiagonal(position, symbol) || checkSecondaryDiagonal(position, symbol);
 }
 
+/** Determines whether the selected row is filled with the same symbol.
+ *
+ * @param row row that the player chose
+ * @param symbol symbol of the current player
+ *
+ * @see checkWin
+ * @see checkCol
+ * @see checkMainDiagonal
+ * @see checkSecondaryDiagonal
+ *
+ * @return true if the selected row is filled with the same symbol, false otherwise
+ */
 bool TicTacToe::checkRow(unsigned int row, Symbol symbol)
 {
     for (int i = 0; i < BOARD_SIZE; i++)
@@ -181,6 +291,18 @@ bool TicTacToe::checkRow(unsigned int row, Symbol symbol)
     return true;
 }
 
+/** Determines whether the selected column is filled with the same symbol.
+ *
+ * @param col column that the player chose
+ * @param symbol symbol of the current player
+ *
+ * @see checkWin
+ * @see checkRow
+ * @see checkMainDiagonal
+ * @see checkSecondaryDiagonal
+ *
+ * @return true if the selected column is filled with the same symbol, false otherwise
+ */
 bool TicTacToe::checkCol(unsigned int col, Symbol symbol)
 {
     for (int i = 0; i < BOARD_SIZE; i++)
@@ -193,6 +315,18 @@ bool TicTacToe::checkCol(unsigned int col, Symbol symbol)
     return true;
 }
 
+/** Determines whether the main diagonal is filled with the same symbol, if the position belongs to the main diagonal.
+ *
+ * @param position processed position that the player chose
+ * @param symbol symbol of the current player
+ *
+ * @see checkWin
+ * @see checkRow
+ * @see checkCol
+ * @see checkSecondaryDiagonal
+ *
+ * @return true if the main diagonal is filled with the sames symbol, false otherwise
+ */
 bool TicTacToe::checkMainDiagonal(pair<unsigned int, unsigned int> position, Symbol symbol)
 {
     if (position.first == position.second)
@@ -213,6 +347,18 @@ bool TicTacToe::checkMainDiagonal(pair<unsigned int, unsigned int> position, Sym
     return false;
 }
 
+/** Determines whether the secondary diagonal is filled with the same symbol, if the position belongs to the secondary diagonal.
+ *
+ * @param position processed position that the player chose
+ * @param symbol symbol of the current player
+ *
+ * @see checkWin
+ * @see checkRow
+ * @see checkCol
+ * @see checkMainDiagonal
+ *
+ * @return true if the secondary diagonal is filled with the sames symbol, false otherwise
+ */
 bool TicTacToe::checkSecondaryDiagonal(pair<unsigned int, unsigned int> position, Symbol symbol)
 {
     if (position.first + position.second == BOARD_SIZE - 1)
@@ -229,11 +375,21 @@ bool TicTacToe::checkSecondaryDiagonal(pair<unsigned int, unsigned int> position
     return false;
 }
 
+/** Increases the score to the current player.
+ *
+ * @see Player::addScore
+ */
 void TicTacToe::addScoreToCurrentPlayer()
 {
     mIs_player_1_time ? mPlayer_1.addScore() : mPlayer_2.addScore();
 }
 
+/** Checks if the players will play again.
+ *
+ * If the players will play again, start another game, otherwise the game is over.
+ *
+ * @see askPlayAgain
+ */
 void TicTacToe::checkPlayAgain()
 {
     bool willPlayAgain = askPlayAgain();
@@ -250,6 +406,10 @@ void TicTacToe::checkPlayAgain()
     }
 }
 
+/** Determines whether the players will play again.
+ *
+ * @return true if the players will play again, false otherwise
+ */
 bool TicTacToe::askPlayAgain()
 {
     int answer;
@@ -270,7 +430,7 @@ bool TicTacToe::askPlayAgain()
     return answer == 1;
 }
 
-/** Changes the player's turn
+/** Changes the player's turn.
  *
  * If it's player 1's turn, it turns to player 2's turn and vice versa.
  */
@@ -279,6 +439,10 @@ void TicTacToe::changePlayerTime()
     mIs_player_1_time = !mIs_player_1_time;
 }
 
+/** Determines whether the game is over.
+ *
+ * @return true if the game is over, false otherwise
+ */
 bool TicTacToe::isGameOver()
 {
     return mIs_game_over;

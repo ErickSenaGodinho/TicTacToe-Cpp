@@ -20,6 +20,10 @@ int main()
     return 0;
 }
 
+/** Shows TicTacToe home menu
+ *
+ * @return true if the players will play, false otherwise
+ */
 bool showMenu()
 {
     int answer;
