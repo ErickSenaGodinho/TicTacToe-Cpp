@@ -5,8 +5,6 @@
 using namespace std;
 
 bool showMenu();
-int input();
-int validateInput(string);
 
 int main()
 {
