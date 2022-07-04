@@ -23,7 +23,7 @@ int input()
 
 /** Converts the first character of a string to a number
  *
- * @return converted number. -1 if input size is less than one.
+ * @return converted number. -1 if input size is more than one.
  */
 int validateInput(string input)
 {
