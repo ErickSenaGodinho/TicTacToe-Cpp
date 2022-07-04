@@ -8,11 +8,11 @@ using namespace std;
 int input();
 int validateInput(string);
 
-/** Converts a string to a number
+/** Converts the input to a number
  *
  * @see validateInput
- * 
- * @return converted number
+ *
+ * @return the input in number format
  */
 int input()
 {
@@ -23,13 +23,11 @@ int input()
 
 /** Converts the first character of a string to a number
  *
- * @see input
- * 
- * @return converted number
+ * @return converted number. -1 if input size is less than one.
  */
 int validateInput(string input)
 {
-    return (int)input[0] - '0';
+    return (input.size() > 1 ? -1 : (int)input[0] - '0');
 }
 
 #endif
